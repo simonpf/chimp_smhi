@@ -9,7 +9,7 @@ All software required for running the retrievals is listed in the
 `chimp_smhi`. To install and activate it, run:
 
 ``` shellsession
-mamba env create -f conda-environment.yml
+conda env create -f conda-environment.yml
 conda activate chimp_smhi
 ```
 
