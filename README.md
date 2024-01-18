@@ -39,11 +39,11 @@ Assuming ``hrit2chimp.py`` has been used to write CHIMP input files to ``<path/t
 chimp process -v <path/to/model/> seviri <path/to/chimp/input> <path/to/chimp/output> --device cpu
 ```
 
-> ***NOTE:*** The conda-environment contains the CPU-only version of PyTorch, therefore retrievals can only be run on the CPU. Since the default is running retrievals on the GPU, the ``--device cpu`` flag must be passed when ``chimp`` is invoked.
+> ***NOTE:*** The conda-environment contains the CPU-only version of PyTorch. Therefore, retrievals can only be run on the CPU. Since the default is running retrievals on the GPU, the ``--device cpu`` flag must be passed when ``chimp`` is invoked.
 
 ## Results
 
-The results are written as NetCDF4 datasets to the output directory. Currently
-the only retrieved variable is ``dbz_mean``. Since the retrievals are
-probabilistic the ``_mean``, ``chimp`` adds the mean suffix to the variable to
+The results are written as NetCDF4 datasets to the provided output directory.
+Currently the only retrieved variable is ``dbz_mean``. Since ``chimp``
+retrievals are probabilistic, the ``_mean`` suffix is added to the variable name
 highlight that it is the expected value of the retrieved posterior distribution.
