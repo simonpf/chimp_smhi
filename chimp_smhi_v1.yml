@@ -1,4 +1,4 @@
-name: chimp_smhi
+name: chimp_smhi_v1
 channels:
   - pytorch
   - conda-forge
@@ -33,6 +33,6 @@ dependencies:
   - geopandas
   - pip
   - pip:
-    - "git+https://github.com/see-geo/pansat@f53727c39167fbdec502f0ded01e33641e67cacb"
-    - "git+https://github.com/simonpf/pytorch_retrieve@de319bfae762801a7b7487c689db85de6cacd8e5"
-    - "git+https://github.com/simonpf/chimp@a95385445c71812f733be9112752320124c8728e"
+    - "git+https://github.com/see-geo/pansat@44b26543ea262f1e3f53d338d4623e6a67063033"
+    - "git+https://github.com/simonpf/pytorch_retrieve@1d588ba6b43681ac2a34c1acb0cd24b4f45121d6"
+    - "git+https://github.com/simonpf/chimp@4e445db18046d03f151343b9f7918eaf75fea205"

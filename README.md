@@ -41,6 +41,24 @@ chimp process -v <path/to/model/> seviri <path/to/chimp/input> <path/to/chimp/ou
 
 > ***NOTE:*** The conda-environment contains the CPU-only version of PyTorch. Therefore, retrievals can only be run on the CPU. Since the default is running retrievals on the GPU, the ``--device cpu`` flag must be passed when ``chimp`` is invoked.
 
+### Model versions
+
+### ``chimp_smhi_v0``
+
+- ResNeXt architecture with 5M parameters
+- Trained on 1-year of collocations
+- Scene size 128
+
+
+### ``chimp_smhi_v1``
+
+- EfficientNet-V2 architecture with 20M parameters
+- Trained on 1-year of collocations
+- Scene size 256
+
+> **NOTE:** The ``chimp_smhi_v1`` model should be run with a tile size of 256.
+
+
 ## Results
 
 The results are written as NetCDF4 datasets to the provided output directory.

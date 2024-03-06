@@ -1,0 +1,38 @@
+name: chimp_smhi_v0
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - netcdf4
+  - pyyaml
+  - pooch
+  - zarr
+  - dask[version='>=0.17.1']
+  - pyorbital
+  - pyresample[version='>=1.10.3']
+  - trollimage[version='>=1.5.1']
+  - appdirs
+  - h5py
+  - donfig
+  - pillow
+  - numpy[version='>=1.4.1']
+  - pyspectral
+  - trollsift
+  - xarray[version='>=0.10.1']
+  - satpy
+  - shapely[version='>2.0']
+  - cartopy
+  - llvm-openmp[version='14']
+  - ipywidgets
+  - lightning
+  - protobuf
+  - geopandas
+  - pip
+  - pip:
+    - "git+https://github.com/see-geo/pansat@f53727c39167fbdec502f0ded01e33641e67cacb"
+    - "git+https://github.com/simonpf/pytorch_retrieve@de319bfae762801a7b7487c689db85de6cacd8e5"
+    - "git+https://github.com/simonpf/chimp@a95385445c71812f733be9112752320124c8728e"

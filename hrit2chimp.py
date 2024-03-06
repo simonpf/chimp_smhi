@@ -59,7 +59,11 @@ def load_and_resample_data(hrit_files: List[Path]) -> xr.Dataset:
     datasets = CHANNEL_CONFIGURATIONS["all"]
     scene = Scene(hrit_files)
     scene.load(datasets)
-    scene_r = scene.resample(NORDICS_4, radius_of_influence=4e3, reader="seviri_hrit")
+    scene_r = scene.resample(
+        NORDICS_4,
+        radius_of_influence=12e3,
+        reader="seviri_hrit"
+    )
 
     obs = []
     names = []
