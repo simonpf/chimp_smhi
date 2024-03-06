@@ -15,7 +15,9 @@ conda activate chimp_smhi
 
 ### Downloading the model file
 
-The retrieval model can be downloaded from [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt).
+The retrieval models can be downloaded from:
+ - Version 0: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt).
+ - Version 1: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt).
 
 ## Running retrievals
 
