@@ -33,6 +33,6 @@ dependencies:
   - geopandas
   - pip
   - pip:
-    - "git+https://github.com/see-geo/pansat@44b26543ea262f1e3f53d338d4623e6a67063033"
-    - "git+https://github.com/simonpf/pytorch_retrieve@1d588ba6b43681ac2a34c1acb0cd24b4f45121d6"
+    - "git+https://github.com/see-geo/pansat@fd9c2e919f01e83f58cf69169ffb13603a992c9e"
+    - "git+https://github.com/simonpf/pytorch_retrieve@ba129f9bb82501b34f2f43dbe4acd4b08b68c111"
     - "git+https://github.com/simonpf/chimp@e153c28dde911701c445fef7dfdf349a5f2fc1cd"
