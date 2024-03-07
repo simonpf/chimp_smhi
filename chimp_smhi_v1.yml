@@ -35,4 +35,4 @@ dependencies:
   - pip:
     - "git+https://github.com/see-geo/pansat@44b26543ea262f1e3f53d338d4623e6a67063033"
     - "git+https://github.com/simonpf/pytorch_retrieve@1d588ba6b43681ac2a34c1acb0cd24b4f45121d6"
-    - "git+https://github.com/simonpf/chimp@4e445db18046d03f151343b9f7918eaf75fea205"
+    - "git+https://github.com/simonpf/chimp@e153c28dde911701c445fef7dfdf349a5f2fc1cd"
