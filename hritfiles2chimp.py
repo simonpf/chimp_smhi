@@ -12,6 +12,7 @@ from typing import Dict, List
 
 import numpy as np
 from satpy import Scene
+from satpy.cf.area import area2cf
 import xarray as xr
 
 from chimp.areas import NORDICS_4
@@ -74,9 +75,9 @@ def load_and_resample_data(hrit_files: List[Path]) -> xr.Dataset:
 
 
 def process(model, input_datasets, input_path, output_path, device="cuda", precision="single", verbose=0):
-    from chimp.processing import InputDataset, load_model, torch, retrieval_step, to_datetime
+    from chimp.processing import InputLoader, load_model, torch, retrieval_step, to_datetime
 
-    input_data = InputDataset(input_path, input_datasets)
+    input_data = InputLoader(input_path, input_datasets)
     model = load_model(model)
 
     output_path = Path(output_path)
@@ -107,8 +108,20 @@ def process(model, input_datasets, input_path, output_path, device="cuda", preci
         date_str = date.strftime("%Y%m%d_%H_%M")
         output_file = output_path / f"chimp_{date_str}.nc"
         LOGGER.info("Writing results to %s", output_file)
+
+        add_grid_mapping(results)
         results.to_netcdf(output_file)
 
+
+def add_grid_mapping(results):
+    """Add the grid mapping and geographic coordinates to the Dataset."""
+    area = NORDICS_4
+
+    results.attrs["area"] = area
+    gm, _ = area2cf(results)
+    results["grid_mapping"] = gm
+    del results.attrs["area"]
+    results.coords["x"], results.coords["y"] = area.get_proj_vectors()
 
 
 if __name__ == '__main__':
