@@ -4,13 +4,13 @@ This repository provides provides preprocessing functionality and instructions f
 
 ## Installation
 
-All software required for running the retrievals is listed in the
-`conda-environment.yml` file, which provides a conda environment named
-`chimp_smhi`. To install and activate it, run:
+All software required for running a specific version of the retrievals is listed in the
+`chimp_smhi_<version-tag>.yml` file (where "<version-tag>" can be `v0` for instance), which provides a conda environment named
+`chimp_smhi_<version-tag>`. To install and activate it, run (here for version `v1`):
 
 ``` shellsession
-conda env create -f conda-environment.yml
-conda activate chimp_smhi
+conda env create -f chimp_smhi_v1.yml
+conda activate chimp_smhi_v1
 ```
 
 ### Downloading the model file
