@@ -5,14 +5,13 @@ running a CHIMP retrieval on SEVIRI observations in HRIT format.
 
 ## Installation
 
-All software required for running the retrievals is listed in the
-`conda-environment_v?.yml` files, which provides a conda environments named
-`chimp_smhi_v?` matching the corresponding retrieval model. The environments
-can be install and activated using:
+All software required for running a specific version of the retrievals is listed in the
+`chimp_smhi_<version-tag>.yml` file (where "<version-tag>" can be `v0` for instance), which provides a conda environment named
+`chimp_smhi_<version-tag>`. To install and activate it, run (here for version `v1`):
 
 ``` shellsession
-conda env create -f chimp_smhi_v?.yml
-conda activate chimp_smhi_v?
+conda env create -f chimp_smhi_v1.yml
+conda activate chimp_smhi_v1
 ```
 
 ### Downloading the model file
@@ -20,6 +19,7 @@ conda activate chimp_smhi_v?
 The retrieval models can be downloaded from:
  - Version 0: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt).
  - Version 1: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt).
+ - Version 2: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v2.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt).
 
 ## Running retrievals
 
