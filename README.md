@@ -1,16 +1,18 @@
 # CHIMP retrievals for SMHI
 
-This repository provides provides preprocessing functionality and instructions for running a CHIMP retrieval on SEVIRI observations in HRIT format.
+This repository provides preprocessing functionality and instructions for
+running a CHIMP retrieval on SEVIRI observations in HRIT format.
 
 ## Installation
 
 All software required for running the retrievals is listed in the
-`conda-environment.yml` file, which provides a conda environment named
-`chimp_smhi`. To install and activate it, run:
+`conda-environment_v?.yml` files, which provides a conda environments named
+`chimp_smhi_v?` matching the corresponding retrieval model. The environments
+can be install and activated using:
 
 ``` shellsession
-conda env create -f conda-environment.yml
-conda activate chimp_smhi
+conda env create -f chimp_smhi_v?.yml
+conda activate chimp_smhi_v?
 ```
 
 ### Downloading the model file
@@ -40,6 +42,11 @@ Assuming ``hrit2chimp.py`` has been used to write CHIMP input files to ``<path/t
 ``` shellsession
 chimp process -v <path/to/model/> seviri <path/to/chimp/input> <path/to/chimp/output> --device cpu
 ```
+For the sequence-based model the process command also needs to specify the number of input steps using the ``sequence_length`` option.
+
+``` shellsession
+chimp process -v <path/to/model/> seviri <path/to/chimp/input> <path/to/chimp/output> --device cpu --sequence_length 16
+```
 
 > ***NOTE:*** The conda-environment contains the CPU-only version of PyTorch. Therefore, retrievals can only be run on the CPU. Since the default is running retrievals on the GPU, the ``--device cpu`` flag must be passed when ``chimp`` is invoked.
 
@@ -58,7 +65,16 @@ chimp process -v <path/to/model/> seviri <path/to/chimp/input> <path/to/chimp/ou
 - Trained on 1-year of collocations
 - Scene size 256
 
-> **NOTE:** The ``chimp_smhi_v1`` model should be run with a tile size of 256.
+> **NOTE:** The ``chimp_smhi_v1``  models should be run with a tile size of 256.
+
+### ``chimp_smhi_v2``
+
+- EfficientNet-V2 2p1 architecture with ~40M parameters
+- Trained on 2-year of collocations over Europe and the Nordics
+- Scene size 256
+
+> **NOTE:** The ``chimp_smhi_v2``  models should be run with a tile size of 256 and
+a sequence length of 16.
 
 
 ## Results
