@@ -20,6 +20,7 @@ The retrieval models can be downloaded from:
  - Version 0: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt).
  - Version 1: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt).
  - Version 2: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v2.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt).
+ - Version 3: [https://huggingface.co/simonpf/chimp_smhi](https://huggingface.co/simonpf/chimp_smhi).
 
 ## Running retrievals
 
@@ -76,6 +77,13 @@ chimp process -v <path/to/model/> seviri <path/to/chimp/input> <path/to/chimp/ou
 > **NOTE:** The ``chimp_smhi_v2``  models should be run with a tile size of 256 and
 a sequence length of 16.
 
+### ``chimp_smhi_v3``
+
+There are two ``chimp_smhi`` version 3 models. The ``chimp_smhi_v3`` model processes single inputs, while the ``chimp_smhi_v3_seq`` model processes multiple inputs.
+
+> **NOTE:** The ``chimp_smhi_v3``  model should be run with a tile size of 256.
+
+> **NOTE:** The ``chimp_smhi_v3_seq``  model should be run with a tile size of 256 and a sequence length of 16.
 
 ## Results
 
