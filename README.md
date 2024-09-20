@@ -91,3 +91,9 @@ The results are written as NetCDF4 datasets to the provided output directory.
 Currently the only retrieved variable is ``dbz_mean``. Since ``chimp``
 retrievals are probabilistic, the ``_mean`` suffix is added to the variable name
 highlight that it is the expected value of the retrieved posterior distribution.
+
+## Example 
+
+The animation below compares the retrieved radar reflectivity for the different model versions.
+
+![Reference and retrieved radar reflectivity from 2024-05-06](chimp_smhi.gif)
