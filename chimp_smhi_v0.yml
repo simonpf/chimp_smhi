@@ -1,8 +1,6 @@
 name: chimp_smhi_v0
 channels:
-  - pytorch
   - conda-forge
-  - defaults
 dependencies:
   - python=3.10
   - pytorch
