@@ -1,18 +1,19 @@
 # CHIMP retrievals for SMHI
 
 This repository provides preprocessing functionality and instructions for
-running a CHIMP retrieval on SEVIRI observations in HRIT format.
+running a CHIMP retrieval on SEVIRI observations.
 
 ## Installation
 
-All software required for running a specific version of the retrievals is listed in the
-`chimp_smhi_<version-tag>.yml` file (where "<version-tag>" can be `v0` for instance), which provides a conda environment named
-`chimp_smhi_<version-tag>`. To install and activate it, run (here for version `v1`):
+All software required for running a specific version of the retrievals is listed in files inside the `envs` directory. The files are named `chimp_smhi_<version-tag>.yml` file, where `<version-tag>` $\in$ `{v0, v1, v2, v3}`. Each file provides a conda environment with the same name (excluing the `.yml` extension).
+
+To install and activate any of the available conda environments, run:
 
 ``` shellsession
-conda env create -f chimp_smhi_v1.yml
-conda activate chimp_smhi_v1
+<conda_exec> env create -f chimp_smhi_<version-tag>.yml
+<conda_exec> activate chimp_smhi_<version-tag>
 ```
+where `<conda_exec>` can be `mamba`, `micromamba`, or `conda` (not recommended).
 
 ### Downloading the model file
 
@@ -24,34 +25,27 @@ The retrieval models can be downloaded from:
 
 ## Running retrievals
 
-Running CHIMP retrievals on SEVIRI files in HRIT format involves two steps: First the SEVIRI input files must be converted to the input data format expected by CHIMP. Secondly, input files must be processed using the ``chimp`` command.
+Running CHIMP retrievals on SEVIRI files involves three steps as described further below.
 
-### Extracting the CHIMP input data
 
-The ``hrit2chimp.py`` script implements a command line application to convert all SEVIRI files in a given input folder to corresponding CHIMP input files. It can be used as follows.
-
-``` shellsession
-python hrit2chimp.py <path/to/folder/with/seviri/data> <path/to/chimp/input>
+1- First one needs to the set the `CHIMP_EXTENSION_MODULES` environment variable as follows:
 ```
-
-The script combines the observations from all SEVIRI channels and writes them into a single CHIMP input file. The seviri input files are written to ``<path/to/chimp/input>/seviri`` since `chimp` expects the inputs from all sensors to be organized into respective subfolders.
-
-### Running CHIMP
-
-Assuming ``hrit2chimp.py`` has been used to write CHIMP input files to ``<path/to/chimp/input>``, the retrieval can be run using:
-
-``` shellsession
-chimp process -v <path/to/model/> seviri <path/to/chimp/input> <path/to/chimp/output> --device cpu
+export CHIMP_EXTENSION_MODULES=chimp_ext_seviri
 ```
-For the sequence-based model the process command also needs to specify the number of input steps using the ``sequence_length`` option.
+This points the `chimp` to the `chimp_ext_seviri` which is needed to read the SEVIRI files.
 
-``` shellsession
-chimp process -v <path/to/model/> seviri <path/to/chimp/input> <path/to/chimp/output> --device cpu --sequence_length 16
+2- Then the `chimp_ext_seviri` module needs to be installed. This can be either done by `pip install chimp-seviri-satpy` or downloading the `chimp_ext_seviri.py` module and modifying the python path accordingly, i.e.
 ```
+export PYTHONPATH="${PYTHONPATH}:<chimp-ext-seviri-directory>"
+```
+where `<chimp-ext-seviri-directory>` is the directory that includes `chimp_ext_seviri.py`.
 
-> ***NOTE:*** The conda-environment contains the CPU-only version of PyTorch. Therefore, retrievals can only be run on the CPU. Since the default is running retrievals on the GPU, the ``--device cpu`` flag must be passed when ``chimp`` is invoked.
+3- Finally, the `chimp` command line interface must be run to reprocess the input files.
 
-### Model versions
+> ***NOTE:*** The conda environment contains the CPU-only version of PyTorch. Therefore, retrievals can only be run on the CPU. Since the default is running retrievals on the GPU, the ``--device cpu`` flag must be passed when ``chimp`` is invoked.
+
+
+## Model versions
 
 ### ``chimp_smhi_v0``
 
@@ -87,13 +81,13 @@ There are two ``chimp_smhi`` version 3 models. The ``chimp_smhi_v3`` model proce
 
 ## Results
 
-The results are written as NetCDF4 datasets to the provided output directory.
+The results are written as `NetCDF4` datasets to the provided output directory.
 Currently the only retrieved variable is ``dbz_mean``. Since ``chimp``
 retrievals are probabilistic, the ``_mean`` suffix is added to the variable name
 highlight that it is the expected value of the retrieved posterior distribution.
 
-## Example 
+## Example
 
 The animation below compares the retrieved radar reflectivity for the different model versions.
 
-![Reference and retrieved radar reflectivity from 2024-05-06](chimp_smhi.gif)
+![Reference and retrieved radar reflectivity from 2024-05-06](figs/chimp_smhi.gif)
