@@ -34,7 +34,7 @@ export CHIMP_EXTENSION_MODULES=chimp_ext_seviri
 ```
 This points the `chimp` to the `chimp_ext_seviri` which is needed to read the SEVIRI files.
 
-2- Then the `chimp_ext_seviri` module needs to be installed. This can be either done by `pip install chimp-seviri-satpy` or downloading the `chimp_ext_seviri.py` module and modifying the python path accordingly, i.e.
+2- Then the `chimp_ext_seviri` module needs to be made available to the `chimp`. This can be done by downloading the `chimp_ext_seviri.py` module and modifying the python path accordingly, i.e.
 ```
 export PYTHONPATH="${PYTHONPATH}:<chimp-ext-seviri-directory>"
 ```
