@@ -31,7 +31,7 @@ export CHIMP_EXTENSION_MODULES=chimp_ext_seviri
 ```
 This makes the `chimp` command-line interface (CLI) aware of the `chimp_ext_seviri` module, which is needed to read the SEVIRI files.
 
-2- Then the `chimp_ext_seviri` module needs to be made available and discoverable to the `chimp`. This can be done by downloading the `chimp_ext_seviri.py` module and modifying the python path accordingly, i.e.
+2- Then the `chimp_ext_seviri` module needs to be made available to and discoverable by the `chimp`. This can be done by downloading the `chimp_ext_seviri.py` module and modifying the python path accordingly, i.e.
 ```
 export PYTHONPATH="${PYTHONPATH}:<chimp-ext-seviri-directory>"
 ```
