@@ -17,10 +17,8 @@ where `<conda_exec>` can be `mamba`, `micromamba`, or `conda` (not recommended).
 ### Downloading the model file
 
 The retrieval models can be downloaded from:
- - Version 0: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v0.pt).
- - Version 1: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt).
- - Version 2: [https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v2.pt](https://rain.atmos.colostate.edu/gprof_nn/chimp/chimp_smhi_v1.pt).
- - Version 3: [https://huggingface.co/simonpf/chimp_smhi](https://huggingface.co/simonpf/chimp_smhi).
+ - versions `<  v3`: [https://rain.atmos.colostate.edu/gprof_nn/chimp/](https://rain.atmos.colostate.edu/gprof_nn/chimp/).
+ - versions `>= v3`: [https://huggingface.co/simonpf/chimp_smhi](https://huggingface.co/simonpf/chimp_smhi).
 
 ## Running retrievals
 
