@@ -1,11 +1,10 @@
 # CHIMP retrievals for SMHI
 
-This repository provides preprocessing functionality and instructions for
-running a CHIMP retrieval on SEVIRI observations.
+This repository provides preprocessing functionality and instructions for running a CHIMP retrieval on SEVIRI observations. 
 
 ## Installation
 
-All software required for running a specific version of the retrievals is listed in files inside the `envs` directory. The files are named `chimp_smhi_<version-tag>.yml` file, where `<version-tag>` $\in$ `{v0, v1, v2, v3}`. Each file provides a conda environment with the same name (excluing the `.yml` extension).
+All software required for running a specific version of the retrievals is listed in files inside the `envs` directory. The files are named `chimp_smhi_<version-tag>.yml`, where `<version-tag>` $\in$ `{v0, v1, v2, v3}`. Each file provides a conda environment with the same name (excluding the `.yml` extension).
 
 To install and activate any of the available conda environments, run:
 
@@ -28,22 +27,23 @@ The retrieval models can be downloaded from:
 Running CHIMP retrievals on SEVIRI files involves three steps as described further below.
 
 
-1- First one needs to the set the `CHIMP_EXTENSION_MODULES` environment variable as follows:
+1- First, one needs to set the `CHIMP_EXTENSION_MODULES` environment variable as follows:
 ```
 export CHIMP_EXTENSION_MODULES=chimp_ext_seviri
 ```
-This points the `chimp` to the `chimp_ext_seviri` which is needed to read the SEVIRI files.
+This makes the `chimp` command-line interface (CLI) aware of the `chimp_ext_seviri` module, which is needed to read the SEVIRI files.
 
-2- Then the `chimp_ext_seviri` module needs to be made available to the `chimp`. This can be done by downloading the `chimp_ext_seviri.py` module and modifying the python path accordingly, i.e.
+2- Then the `chimp_ext_seviri` module needs to be made available and discoverable to the `chimp`. This can be done by downloading the `chimp_ext_seviri.py` module and modifying the python path accordingly, i.e.
 ```
 export PYTHONPATH="${PYTHONPATH}:<chimp-ext-seviri-directory>"
 ```
 where `<chimp-ext-seviri-directory>` is the directory that includes `chimp_ext_seviri.py`.
 
-3- Finally, the `chimp` command line interface must be run to reprocess the input files.
+3- Finally, the `chimp` CLI must be run to reprocess the input files.
 
 > ***NOTE:*** The conda environment contains the CPU-only version of PyTorch. Therefore, retrievals can only be run on the CPU. Since the default is running retrievals on the GPU, the ``--device cpu`` flag must be passed when ``chimp`` is invoked.
 
+> ***NOTE:*** One can run `chimp process --help` to be informed about the available options and the exact order of command-line arguments that can be passed to the `chimp` CLI.
 
 ## Model versions
 
