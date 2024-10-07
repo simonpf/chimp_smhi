@@ -67,5 +67,4 @@ class SEVIRI(InputDataset):
                 LOGGER.warning("Reading of the input file '%s' failed. Skipping.", input_file)
         return torch.tensor(x_s.copy(), dtype=torch.float32)
 
-
-seviri = SEVIRI("seviri")
+seviri_instance = SEVIRI("seviri")
