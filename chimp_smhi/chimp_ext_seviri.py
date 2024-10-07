@@ -1,3 +1,5 @@
+"""The module which includes the :obj:`SEVIRI` class allowing to read SEVIRI resampled files."""
+
 import logging
 from pathlib import Path
 from typing import Generator, Optional, Tuple, Union
@@ -13,11 +15,15 @@ LOGGER = logging.getLogger(__name__)
 
 
 class SEVIRI(InputDataset):
+    """A derivative class of obj:`InputDataset` enabling reading from SEVIRI resampled files."""
+
     def __init__(self, name: str):
+        """The constructor of the class which initializes the instance given a ``name`` for the dataset."""
         super().__init__(name, "seviri", scale=4, variables=CHANNEL_NAMES.values())
 
     @property
     def n_channels(self) -> int:
+        """Retrieves the number of channels in the dataset."""
         return len(self.variables)
 
     def load_sample(
@@ -30,8 +36,7 @@ class SEVIRI(InputDataset):
             rotate: Optional[float] = None,
             flip: Optional[bool] = False,
     ) -> torch.Tensor:
-        """
-        Load input data sample from file.
+        """Load input data sample from file.
 
         Args:
             input_file: The path of the input file which includes the data.
