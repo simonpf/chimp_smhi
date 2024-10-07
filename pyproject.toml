@@ -1,0 +1,43 @@
+[project]
+name = "chimp_smhi"
+version = "0.1"
+description = "CHIMP-SHMI extensions to read different file formats."
+dependencies = ["chimp", "numpy", "torch", "satpy", "xarray"]
+authors = [
+    { name = "Pouria Khalaj", email = "pouria.khalaj@smhi.se" },
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# Hatch
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["chimp_smhi"]
+
+# Ruff
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+# See https://docs.astral.sh/ruff/rules/
+select = ["A", "B", "D", "E", "W", "F", "I", "N", "PT", "S", "TID", "C90", "Q", "T10", "T20"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
