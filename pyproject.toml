@@ -36,6 +36,9 @@ line-length = 120
 # See https://docs.astral.sh/ruff/rules/
 select = ["A", "B", "D", "E", "W", "F", "I", "N", "PT", "S", "TID", "C90", "Q", "T10", "T20"]
 
+[tool.ruff.lint.per-file-ignores]
+"*/tests/*" = ["S101"]  # assert allowed in tests
+
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
