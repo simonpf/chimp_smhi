@@ -9,9 +9,25 @@ import torch
 import xarray as xr
 from chimp.data import InputDataset
 from chimp.data.utils import scale_slices
-from satpy.readers.seviri_base import CHANNEL_NAMES
 
 LOGGER = logging.getLogger(__name__)
+
+# The order of channels matter. As a result, using `satpy.readers.seviri_base.CHANNEL_NAMES.values()` might not work!
+# It has the correct channels but not necessarily according to the following order!
+CHANNEL_NAMES = [
+    "HRV",
+    "VIS006",
+    "VIS008",
+    "IR_016",
+    "IR_039",
+    "WV_062",
+    "WV_073",
+    "IR_087",
+    "IR_097",
+    "IR_108",
+    "IR_120",
+    "IR_134",
+]
 
 
 class SEVIRI(InputDataset):
@@ -19,7 +35,7 @@ class SEVIRI(InputDataset):
 
     def __init__(self, name: str):
         """The constructor of the class which initializes the instance given a ``name`` for the dataset."""
-        super().__init__(name, "seviri", scale=4, variables=CHANNEL_NAMES.values())
+        super().__init__(name, "seviri", scale=4, variables=CHANNEL_NAMES)
 
     @property
     def n_channels(self) -> int:
@@ -66,5 +82,6 @@ class SEVIRI(InputDataset):
             except OSError:
                 LOGGER.warning("Reading of the input file '%s' failed. Skipping.", input_file)
         return torch.tensor(x_s.copy(), dtype=torch.float32)
+
 
 seviri_instance = SEVIRI("seviri")
