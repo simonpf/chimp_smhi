@@ -1,0 +1,38 @@
+name: chimp_smhi_v3_cuda
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python[version=">=3.10"]
+  - pytorch-cuda[version=">=12.1"]
+  - torchvision
+  - netcdf4
+  - pyyaml
+  - pooch
+  - zarr
+  - dask[version=">=0.17.1"]
+  - pyorbital
+  - pyresample[version=">=1.10.3"]
+  - trollimage[version=">=1.5.1"]
+  - appdirs
+  - h5py
+  - donfig
+  - pillow
+  - numpy[version=">=1.4.1"]
+  - pyspectral
+  - trollsift
+  - xarray[version=">=0.10.1"]
+  - satpy
+  - shapely[version=">2.0"]
+  - cartopy
+  - llvm-openmp[version="14"]
+  - ipywidgets
+  - lightning
+  - protobuf
+  - geopandas
+  - pip
+  - pip:
+    - "git+https://github.com/see-geo/pansat@d19ac3ef9ed549702d5a014808c2b10f6ec86355"
+    - "git+https://github.com/simonpf/pytorch_retrieve@84ae56a0c210f42227ce13d8baf0f32c37b38de5"
+    - "git+https://github.com/simonpf/chimp@36824df69eca29ce1e69759b05f2f23e519867ad"
