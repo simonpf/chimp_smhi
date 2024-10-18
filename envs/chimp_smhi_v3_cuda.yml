@@ -4,35 +4,36 @@ channels:
   - nvidia
   - conda-forge
 dependencies:
-  - python[version=">=3.10"]
-  - pytorch-cuda[version=">=12.1"]
-  - torchvision
+  - python[version=">=3.12"]
+  - pytorch::pytorch
+  - pytorch::pytorch-cuda[version=">=12.4"]
+  - pytorch::torchvision
   - netcdf4
   - pyyaml
   - pooch
   - zarr
-  - dask[version=">=0.17.1"]
+  - dask
   - pyorbital
-  - pyresample[version=">=1.10.3"]
-  - trollimage[version=">=1.5.1"]
+  - pyresample
+  - trollimage
   - appdirs
   - h5py
   - donfig
   - pillow
-  - numpy[version=">=1.4.1"]
+  - numpy
   - pyspectral
   - trollsift
-  - xarray[version=">=0.10.1"]
+  - xarray
   - satpy
-  - shapely[version=">2.0"]
+  - shapely
   - cartopy
-  - llvm-openmp[version="14"]
+  - llvm-openmp
   - ipywidgets
   - lightning
   - protobuf
   - geopandas
   - pip
   - pip:
-    - "git+https://github.com/see-geo/pansat@44b26543ea262f1e3f53d338d4623e6a67063033"
-    - "git+https://github.com/simonpf/pytorch_retrieve@5239b1cb69d24a441820a10980c20a8b06becfbb"
-    - "git+https://github.com/simonpf/chimp@59e8054d0f744235973f516d49944044968f4778"
+      - "git+https://github.com/see-geo/pansat@refactoring"
+      - "git+https://github.com/simonpf/pytorch_retrieve"
+      - "git+https://github.com/simonpf/chimp"
