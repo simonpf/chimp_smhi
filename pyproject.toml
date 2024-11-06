@@ -1,7 +1,7 @@
 [project]
 name = "chimp_smhi"
 version = "0.1"
-description = "CHIMP-SHMI extensions to read different file formats."
+description = "CHIMP-SHMI extensions to read `native`, `netcdf`, and `hrit` file formats."
 dependencies = ["chimp", "numpy", "torch", "satpy", "xarray"]
 authors = [
     { name = "Pouria Khalaj", email = "pouria.khalaj@smhi.se" },
