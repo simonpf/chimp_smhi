@@ -1,4 +1,4 @@
-name: chimp_smhi_v3
+name: chimp_smhi
 channels:
   - pytorch
   - nvidia
