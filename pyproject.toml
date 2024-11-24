@@ -1,12 +1,13 @@
 [project]
 name = "chimp_smhi"
 version = "0.1"
-description = "CHIMP-SHMI extensions to read `native`, `netcdf`, and `hrit` file formats."
-dependencies = ["chimp", "numpy", "torch", "satpy", "xarray"]
+description = "A package including CHIMP extensions to allow reading `native`, `netcdf`, and `hrit` file formats."
+dependencies = ["chimp", "loguru", "numpy", "satpy", "torch", "xarray"]
 authors = [
     { name = "Pouria Khalaj", email = "pouria.khalaj@smhi.se" },
 ]
 readme = "README.md"
+requires-python = ">= 3.12"
 license = { file = "LICENSE" }
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -25,19 +26,29 @@ build-backend = "hatchling.build"
 [tool.hatch.metadata]
 allow-direct-references = true
 
-[tool.hatch.build.targets.wheel]
-packages = ["chimp_smhi"]
+[tool.setuptools.packages.find]
+where = ["chimp_smhi"]
 
 # Ruff
 [tool.ruff]
 line-length = 120
+exclude = ["README.md"]
+
 
 [tool.ruff.lint]
 # See https://docs.astral.sh/ruff/rules/
 select = ["A", "B", "D", "E", "W", "F", "I", "N", "PT", "S", "TID", "C90", "Q", "T10", "T20"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["S101"]  # assert allowed in tests
+# D100: docstrings in test modules are optional
+# D103: docstrings in test functions are optional
+# S101: assert allowed in tests
+"src/tests/*" = ["D100", "D103", "S101"]
+
+"docs/source/conf.py" = ["D100", "A001"]  # sphinx misbihaving
+
+"__init__.py" = ["D104"] # docstrings in packages are optional
+
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
