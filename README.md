@@ -4,15 +4,26 @@ This repository provides preprocessing functionality and instructions for runnin
 
 ## Installation
 
-All software required for running a specific version of the retrievals is listed in files inside the `envs` directory. The files are named `chimp_smhi_<version-tag>.yml`, where `<version-tag>` $\in$ `{v0, v1, v2, v3}`. Each file provides a conda environment with the same name (excluding the `.yml` extension).
+First clone the repository
+``` shellsession
+git clone https://github.com/simonpf/chimp_smhi.git
+```
+All the requirements for running chimp is in [chimp_smhi.yaml](./envs/chimp_smhi.yaml).
+The file provides a conda environment with the same name (excluding the `.yaml` extension).
 
-To install and activate any of the available conda environments, run:
+To install and activate the available conda environment, run:
 
 ``` shellsession
-<conda_exec> env create -f chimp_smhi_<version-tag>.yml
-<conda_exec> activate chimp_smhi_<version-tag>
+<conda_exec> env create -f chimp_smhi/envs/chimp_smhi.yaml
+<conda_exec> activate chimp_smhi
 ```
-where `<conda_exec>` can be `mamba`, `micromamba`, or `conda` (not recommended).
+where `<conda_exec>` can be either [mamba](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html)
+or [micromamba](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html).
+
+Finally install the present package, i.e. `chimp_smhi` via
+``` shellsession
+pip install chimp_smhi
+```
 
 ### Downloading the model file
 
