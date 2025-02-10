@@ -1,0 +1,70 @@
+name = "chimp_smhi"
+
+[architecture]
+name = "EncoderDecoder"
+
+[architecture.encoder]
+channels = [29, 58, 77, 154, 192, 307]
+downsampling_factors = [[1, 1, 1], [2, 2, 2], [1, 2, 2], [2, 2, 2], [1, 2, 2]]
+stage_depths = [1, 3, 3, 4, 6, 21]
+block_factory = [
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+]
+block_factory_args = [
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=1, excitation_ratio=0.0, fused=true},
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.0, fused=true},
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.0, fused=true},
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.25},
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=6, excitation_ratio=0.25},
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=6, excitation_ratio=0.25},
+]
+aggregation_factory = "Linear3d"
+
+[architecture.decoder]
+channels = [192, 154, 77, 58, 48]
+upsampling_factors = [[1, 2, 2], [2, 2, 2], [1, 2, 2], [2, 2, 2], [1, 2, 2]]
+upsampling_factory = "Trilinear"
+stage_depths = [6, 4, 3, 3, 1]
+block_factory = [
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+    "InvertedBottleneck2Plus1",
+]
+block_factory_args = [
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=6, excitation_ratio=0.25}, {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.25},
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.0, fused=true},
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.0, fused=true},
+    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=1, excitation_ratio=0.0, fused=true},
+]
+aggregation_factory = "Linear3d"
+skip_connections=true
+
+[architecture.head.default]
+depth = 4
+kind = "BasicConv3d"
+activation_factory = "GELU"
+normalization_factory = "RMSNorm"
+
+[architecture.stem]
+kind = "BasicConv3d"
+depth = 1
+kernel_size = [1, 3, 3]
+out_channels = 32
+downsampling = [1, 2, 2]
+
+[input.seviri]
+n_features=12
+normalize="minmax"
+scale = 4
+
+[output.surface_precip]
+kind = "Quantiles"
+quantiles = 32
+
