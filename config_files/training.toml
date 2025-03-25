@@ -1,70 +1,116 @@
-name = "chimp_smhi"
+[warmup_1]
+input_datasets = ["seviri"]
+reference_datasets = ["baltrad"]
+training_data_path = "ENV::{TMPDIR}/training_data"
+validation_data_path = "ENV::{TMPDIR}/validation_data"
+optimizer = "AdamW"
+batch_size = 1
+optimizer_args = {"lr"=1e-3}
+scheduler = "Warmup"
+sequence_length = 16
+n_epochs = 20
+sample_rate = 0.25
+scene_size = 256
+require_input = true
+accumulate_grad_batches = 4
+n_data_loader_workers = 6
+metrics = ["CorrelationCoef", "Bias", "MSE"]
+load_weights = "efficient_net_2p1_pretrained.pt"
 
-[architecture]
-name = "EncoderDecoder"
+[stage_1]
+input_datasets = ["seviri"]
+reference_datasets = ["baltrad"]
+training_data_path = "ENV::{TMPDIR}/training_data"
+validation_data_path = "ENV::{TMPDIR}/validation_data"
+optimizer = "AdamW"
+scheduler = "CosineAnnealingLR"
+scheduler_args = {T_max = 30}
+batch_size = 1
+optimizer_args = {"lr"=5e-4}
+sequence_length = 16
+n_epochs = 30
+sample_rate = 4
+scene_size = 256
+require_input = true
+accumulate_grad_batches = 4
+n_data_loader_workers = 6
+metrics = ["CorrelationCoef", "Bias", "MSE"]
+reuse_optimizer = true
 
-[architecture.encoder]
-channels = [29, 58, 77, 154, 192, 307]
-downsampling_factors = [[1, 1, 1], [2, 2, 2], [1, 2, 2], [2, 2, 2], [1, 2, 2]]
-stage_depths = [1, 3, 3, 4, 6, 21]
-block_factory = [
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-]
-block_factory_args = [
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=1, excitation_ratio=0.0, fused=true},
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.0, fused=true},
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.0, fused=true},
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.25},
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=6, excitation_ratio=0.25},
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=6, excitation_ratio=0.25},
-]
-aggregation_factory = "Linear3d"
+[warmup_2]
+input_datasets = ["seviri"]
+reference_datasets = ["baltrad"]
+training_data_path = "ENV::{TMPDIR}/training_data"
+validation_data_path = "ENV::{TMPDIR}/validation_data"
+optimizer = "AdamW"
+batch_size = 1
+optimizer_args = {"lr"=5e-4}
+scheduler = "Warmup"
+sequence_length = 16
+n_epochs = 20
+sample_rate = 0.25
+scene_size = 256
+require_input = true
+accumulate_grad_batches = 4
+n_data_loader_workers = 6
+metrics = ["CorrelationCoef", "Bias", "MSE"]
+reuse_optimizer = true
 
-[architecture.decoder]
-channels = [192, 154, 77, 58, 48]
-upsampling_factors = [[1, 2, 2], [2, 2, 2], [1, 2, 2], [2, 2, 2], [1, 2, 2]]
-upsampling_factory = "Trilinear"
-stage_depths = [6, 4, 3, 3, 1]
-block_factory = [
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-    "InvertedBottleneck2Plus1",
-]
-block_factory_args = [
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=6, excitation_ratio=0.25}, {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.25},
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.0, fused=true},
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=4, excitation_ratio=0.0, fused=true},
-    {normalization_factory="RMSNorm", activation_factory="GELU", expansion_factor=1, excitation_ratio=0.0, fused=true},
-]
-aggregation_factory = "Linear3d"
-skip_connections=true
+[stage_2]
+input_datasets = ["seviri"]
+reference_datasets = ["baltrad"]
+training_data_path = "ENV::{TMPDIR}/training_data"
+validation_data_path = "ENV::{TMPDIR}/validation_data"
+optimizer = "AdamW"
+scheduler = "CosineAnnealingLR"
+scheduler_args = {T_max = 50}
+batch_size = 1
+optimizer_args = {"lr"=5e-4}
+sequence_length = 16
+n_epochs = 50
+sample_rate = 4
+scene_size = 256
+require_input = true
+accumulate_grad_batches = 4
+n_data_loader_workers = 6
+metrics = ["CorrelationCoef", "Bias", "MSE"]
+reuse_optimizer = true
 
-[architecture.head.default]
-depth = 4
-kind = "BasicConv3d"
-activation_factory = "GELU"
-normalization_factory = "RMSNorm"
+[warmup_3]
+input_datasets = ["seviri"]
+reference_datasets = ["baltrad"]
+training_data_path = "ENV::{TMPDIR}/training_data"
+validation_data_path = "ENV::{TMPDIR}/validation_data"
+optimizer = "AdamW"
+scheduler = "Warmup"
+batch_size = 2
+optimizer_args = {"lr"=1e-4}
+sequence_length = 16
+n_epochs = 20
+sample_rate = 0.25
+scene_size = 256
+require_input = true
+accumulate_grad_batches = 4
+n_data_loader_workers = 6
+metrics = ["CorrelationCoef", "Bias", "MSE"]
+reuse_optimizer = true
 
-[architecture.stem]
-kind = "BasicConv3d"
-depth = 1
-kernel_size = [1, 3, 3]
-out_channels = 32
-downsampling = [1, 2, 2]
-
-[input.seviri]
-n_features=12
-normalize="minmax"
-scale = 4
-
-[output.surface_precip]
-kind = "Quantiles"
-quantiles = 32
-
+[stage_3]
+input_datasets = ["seviri"]
+reference_datasets = ["baltrad"]
+training_data_path = "ENV::{TMPDIR}/training_data"
+validation_data_path = "ENV::{TMPDIR}/validation_data"
+optimizer = "AdamW"
+scheduler = "CosineAnnealingLR"
+scheduler_args = {T_max = 20}
+batch_size = 2
+optimizer_args = {"lr"=1e-4}
+sequence_length = 16
+n_epochs = 20
+sample_rate = 4
+scene_size = 256
+require_input = true
+accumulate_grad_batches = 4
+n_data_loader_workers = 6
+metrics = ["CorrelationCoef", "Bias", "MSE"]
+reuse_optimizer = true
